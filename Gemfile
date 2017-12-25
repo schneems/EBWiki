@@ -162,3 +162,5 @@ gem 'rack-host-redirect'
 gem 'rubocop', require: false
 
 gem 'fullcalendar-rails'
+
+gem 'jbuilder'
