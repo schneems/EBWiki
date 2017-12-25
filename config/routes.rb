@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'test_pages/show'
+
   resources :agencies
   get 'analytics/show'
 
@@ -8,6 +10,9 @@ Rails.application.routes.draw do
 
   get '/maps/index', to: 'maps#index'
 
+  get "/test_pages/:page" => "test_pages#show"
+
+  get '/calendar', to: 'static#calendar'
   get '/about', to: 'static#about'
   get '/guidelines', to: 'static#guidelines'
   get '/javascript_lab', to: 'static#javascript_lab'
