@@ -24,7 +24,7 @@ class CalendarEventsController < ApplicationController
     @calendar_event = CalendarEvent.new(calendar_event_params)
 
     if @calendar_event.save
-      redirect_to @calendar_event, notice: 'Calendar event was successfully created.'
+      redirect_to action: "index", notice: 'Calendar event was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class CalendarEventsController < ApplicationController
   # PATCH/PUT /calendar_events/1
   def update
     if @calendar_event.update(calendar_event_params)
-      redirect_to @calendar_event, notice: 'Calendar event was successfully updated.'
+      redirect_to action: "index", notice: 'Calendar event was successfully updated.'
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class CalendarEventsController < ApplicationController
   # DELETE /calendar_events/1
   def destroy
     @calendar_event.destroy
-    redirect_to calendar_events_url, notice: 'Calendar event was successfully destroyed.'
+    redirect_to action: "index", notice: 'Calendar event was successfully destroyed.'
   end
 
   private
