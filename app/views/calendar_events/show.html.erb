@@ -20,5 +20,5 @@
   <%= @calendar_event.end_time %>
 </p>
 
-<%= link_to 'Edit', edit_calendar_event_path(@calendar_event) %> |
+<%= link_to 'Edit', edit_calendar_event_path(@calendar_event), remote: true %> |
 <%= link_to 'Back', calendar_events_path %>
