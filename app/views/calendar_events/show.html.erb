@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Type:</strong>
+  <%= @calendar_event.event_type %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @calendar_event.description %>
 </p>
@@ -19,6 +24,12 @@
   <strong>End time:</strong>
   <%= @calendar_event.end_time %>
 </p>
+
+<h3>Comment on this event:</h3>
+<%= render "comments/add_comment_form" %>
+<div class="commentList" >
+  <%= render "comments/comments" %>
+</div>
 
 <%= link_to 'Edit', 
                 edit_calendar_event_path(@calendar_event), 

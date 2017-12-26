@@ -8,6 +8,9 @@ class CalendarEventsController < ApplicationController
 
   # GET /calendar_events/1
   def show
+    @commentable = @calendar_event
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   # GET /calendar_events/new

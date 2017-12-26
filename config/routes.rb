@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :calendar_events
+  resources :calendar_events do
+    resources :comments
+  end
+
   get 'test_pages/show'
 
   resources :agencies

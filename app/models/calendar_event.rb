@@ -1,6 +1,8 @@
 class CalendarEvent < ActiveRecord::Base
   validates :title, presence: true
 
+  has_many :comments, as: :commentable
+
   attr_accessor :date_range
 
   EVENT_COLORS = { "Litigation Event" => "teal", "March" => "orange", "Vigil" => "olive" }
