@@ -53,6 +53,6 @@ class CalendarEventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def calendar_event_params
-      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time)
+      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time, :event_type)
     end
 end
