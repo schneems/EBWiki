@@ -29,11 +29,21 @@ RSpec.describe CalendarEventsController, type: :controller do
   # CalendarEvent. As you add validations to CalendarEvent, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      title: 'Event 1',
+      description: 'Some important event',
+      start_time: DateTime.now + (2/24.0),
+      end_time: DateTime.now + (4/24.0)
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      title: '',
+      description: '',
+      start_time: '',
+      end_time: ''
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -80,9 +90,9 @@ RSpec.describe CalendarEventsController, type: :controller do
         }.to change(CalendarEvent, :count).by(1)
       end
 
-      it "redirects to the created calendar_event" do
+      it "redirects to the updated calendar index" do
         post :create, {:calendar_event => valid_attributes}, valid_session
-        expect(response).to redirect_to(CalendarEvent.last)
+        expect(response).to redirect_to(calendar_events_path)
       end
     end
 
@@ -107,10 +117,10 @@ RSpec.describe CalendarEventsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the calendar_event" do
+      it "redirects to the calendar index" do
         calendar_event = CalendarEvent.create! valid_attributes
         put :update, {:id => calendar_event.to_param, :calendar_event => valid_attributes}, valid_session
-        expect(response).to redirect_to(calendar_event)
+        expect(response).to redirect_to(calendar_events_path)
       end
     end
 

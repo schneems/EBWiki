@@ -22,32 +22,48 @@ class CalendarEventsController < ApplicationController
 
   # GET /calendar_events/1/edit
   def edit
+    respond_to do |format|
+      format.html { render :partial => 'edit' }
+      format.js
+    end
   end
 
   # POST /calendar_events
   def create
     @calendar_event = CalendarEvent.new(calendar_event_params)
 
-    if @calendar_event.save
-      redirect_to action: "index", notice: 'Calendar event was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      if @calendar_event.save
+        format.html {redirect_to action: "index"}
+        format.json {render :json => @calendar_event,
+                    :status => :created, :location => @calendar_event }
+      else
+        format.html {render :partial => 'new'}
+        format.json {render :json => @post.errors,
+                    :status => :unprocessable_entity}
+      end
     end
   end
 
   # PATCH/PUT /calendar_events/1
   def update
-    if @calendar_event.update(calendar_event_params)
-      redirect_to action: "index", notice: 'Calendar event was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @calendar_event.update(calendar_event_params)
+        format.html {redirect_to action: "index"}
+        format.json {render :json => @calendar_event,
+                    :status => :created, :location => @calendar_event }
+      else
+        format.html {render :partial => 'edit'}
+        format.json {render :json => @post.errors,
+                    :status => :unprocessable_entity}
+      end
     end
   end
 
   # DELETE /calendar_events/1
   def destroy
     @calendar_event.destroy
-    redirect_to action: "index", notice: 'Calendar event was successfully destroyed.'
+    redirect_to action: "index"
   end
 
   private
