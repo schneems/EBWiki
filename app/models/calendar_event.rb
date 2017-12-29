@@ -10,8 +10,18 @@ class CalendarEvent < ActiveRecord::Base
 
   EVENT_TEXT_COLORS = { "Litigation Event" => "dark green", "March" => "brown", "Vigil" => "white"}
 
+  # Geocoding
+  geocoded_by :full_address
+  before_save :geocode, if: proc { |art|
+    art.address_changed? || art.city_changed? || art.state_id_changed? || art.zipcode_changed?
+  } # auto-fetch coordinates
+
   def all_day_event?
     self.start == self.start.midnight && self.end == self.end.midnight ? true : false
+  end
+
+  def full_address
+    "#{address} #{city} #{State.find(state_id).ansi_code} #{zipcode}".strip
   end
 
   def color

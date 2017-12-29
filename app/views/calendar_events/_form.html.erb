@@ -6,6 +6,15 @@
     
     <%= f.input :start_time, input_html: { class: "form-control input-sm datetimepicker" } %>
     <%= f.input :end_time, input_html: { class: "form-control input-sm datetimepicker" } %>
+    <fieldset class="fsStyle">
+    <legend class="legendStyle">
+      <div data-toggle="collapse">Event Location Info <%= image_tag('help_icon.png', data: {:toggle => 'popover', :container => 'body', :trigger => 'hover',:placement => "bottom", :title => "Event Location", :content => "These fields relate to where the event took place. Editors should be as specific as possible, approximating a street address and a zip code."})%></div>
+    </legend>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.collection_select :state_id, State.all, :id, :name, {prompt: "State"}, label:"State" %>
+    <%= f.input :zipcode %>
+  </fieldset>
   </div>
 
   <div class="form-actions">
