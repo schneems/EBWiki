@@ -13,8 +13,10 @@ describe CalendarEventPolicy do
     it { is_expected.to forbid_action(:destroy) }
   end
 
-  context 'not being the owner of the calendar_event' do
-    pending
+  context 'being a registered user' do
+    let(:user) { FactoryBot.create(:user) }
+    
+    it { is_expected.to permit_action(:create) }
   end
 
   context 'being the owner of the calendar_event' do
@@ -22,6 +24,10 @@ describe CalendarEventPolicy do
 	let(:calendar_event) { CalendarEvent.create(user_id: user.id) }
 
 	it { is_expected.to permit_action(:destroy) }
+  end
+
+  context 'not being the owner of the calendar_event' do
+    pending
   end
 end
 
