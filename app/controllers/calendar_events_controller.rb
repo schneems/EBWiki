@@ -4,6 +4,7 @@ class CalendarEventsController < ApplicationController
   # GET /calendar_events
   def index
     @calendar_events = CalendarEvent.all
+    authorize @calendar_events
   end
 
   # GET /calendar_events/1
@@ -17,6 +18,7 @@ class CalendarEventsController < ApplicationController
   # GET /calendar_events/new
   def new
     @calendar_event = CalendarEvent.new
+    authorize @calendar_event
 
     respond_to do |format|
       format.html { render :partial => 'new' }
@@ -36,6 +38,7 @@ class CalendarEventsController < ApplicationController
   def create
     @calendar_event = CalendarEvent.new(calendar_event_params)
     @calendar_event.user = current_user
+    authorize @calendar_event
 
     respond_to do |format|
       if @calendar_event.save
@@ -75,10 +78,11 @@ class CalendarEventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar_event
       @calendar_event = CalendarEvent.find(params[:id])
+      authorize @calendar_event
     end
 
     # Only allow a trusted parameter "white list" through.
     def calendar_event_params
-      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time, :event_type, :address, :city, :state_id, :zipcode, :latitude, :longitude)
+      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time, :event_type, :address, :city, :state_id, :zipcode, :latitude, :longitude, :user_id)
     end
 end

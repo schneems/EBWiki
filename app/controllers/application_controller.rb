@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :mailbox, :conversation
 
+  include Pundit
+
   def info_for_paper_trail
     # Save additional info
     { ip: request.remote_ip }
@@ -25,22 +27,29 @@ class ApplicationController < ActionController::Base
     user_signed_in? ? current_user.id : 'Guest'
   end
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
 
-  def mailbox
-    @mailbox ||= current_user.mailbox
-  end
+    def mailbox
+      @mailbox ||= current_user.mailbox
+    end
 
-  def conversation
-    @conversation ||= mailbox.conversations.find(params[:id])
-  end
+    def conversation
+      @conversation ||= mailbox.conversations.find(params[:id])
+    end
 
-  def log_invalid_token_attempt
-    warning_message = 'Invalid Auth Token error'
-    Rails.logger.warn warning_message
-    Rollbar.warning warning_message
-    redirect_to '/'
-  end
+    def log_invalid_token_attempt
+      warning_message = 'Invalid Auth Token error'
+      Rails.logger.warn warning_message
+      Rollbar.warning warning_message
+      redirect_to '/'
+    end
+
+    def user_not_authorized
+      flash[:warning] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    end
 
   protected
 
