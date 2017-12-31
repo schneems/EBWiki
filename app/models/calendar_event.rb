@@ -2,6 +2,7 @@ class CalendarEvent < ActiveRecord::Base
   validates :title, presence: true
 
   has_many :comments, as: :commentable
+  belongs_to :user
 
   attr_accessor :date_range
 

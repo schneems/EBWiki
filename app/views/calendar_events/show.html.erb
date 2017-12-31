@@ -16,6 +16,11 @@
 </p>
 
 <p>
+  <strong>Event Owner:</strong>
+  <%= link_to @event_owner.name, user_path(@event_owner) %>
+</p>
+
+<p>
   <strong>Start time:</strong>
   <%= @calendar_event.start_time %>
 </p>

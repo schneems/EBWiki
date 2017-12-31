@@ -11,6 +11,7 @@ class CalendarEventsController < ApplicationController
     @commentable = @calendar_event
     @comments = @commentable.comments
     @comment = Comment.new
+    @event_owner = @calendar_event.user
   end
 
   # GET /calendar_events/new
@@ -34,6 +35,7 @@ class CalendarEventsController < ApplicationController
   # POST /calendar_events
   def create
     @calendar_event = CalendarEvent.new(calendar_event_params)
+    @calendar_event.user = current_user
 
     respond_to do |format|
       if @calendar_event.save
