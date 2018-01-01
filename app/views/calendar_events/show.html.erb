@@ -22,12 +22,12 @@
 
 <p>
   <strong>Start time:</strong>
-  <%= @calendar_event.start_time %>
+  <%= @calendar_event.start_time.strftime("%A, %d %b %Y %l:%M %p") %>
 </p>
 
 <p>
   <strong>End time:</strong>
-  <%= @calendar_event.end_time %>
+  <%= @calendar_event.end_time.strftime("%A, %d %b %Y %l:%M %p") %>
 </p>
 
 <h3>Comment on this event:</h3>
