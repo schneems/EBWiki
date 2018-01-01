@@ -77,7 +77,7 @@ class CalendarEventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar_event
-      @calendar_event = CalendarEvent.find(params[:id])
+      @calendar_event = CalendarEvent.friendly.find(params[:id])
       authorize @calendar_event
     end
 

@@ -6,6 +6,9 @@ class CalendarEvent < ActiveRecord::Base
 
   attr_accessor :date_range
 
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
   EVENT_COLORS = { "Litigation Event" => "teal", "March" => "orange", "Vigil" => "olive" }
 
 
@@ -27,17 +30,26 @@ class CalendarEvent < ActiveRecord::Base
 
   def color
   	unless self.event_type.blank?
-	  EVENT_COLORS[self.event_type]
-	else
-	  "#ccc"
-	end
+  	  EVENT_COLORS[self.event_type]
+  	else
+  	  "#ccc"
+  	end
   end
 
   def text_color
   	unless self.event_type.blank?
-	  EVENT_TEXT_COLORS[self.event_type]
-	else
-	  "#000000"
-	end
+  	  EVENT_TEXT_COLORS[self.event_type]
+  	else
+  	  "#000000"
+  	end
+  end
+
+  # Try building a slug based on the following fields in
+  # increasing order of specificity.
+  def slug_candidates
+    [
+      :title,
+      %i[title city]
+    ]
   end
 end
