@@ -8,7 +8,7 @@ class CalendarEventPolicy < ApplicationPolicy
   end
  
   def update?
-    return true if user.present?.user
+    return true if user.present?
   end
  
   def destroy?
