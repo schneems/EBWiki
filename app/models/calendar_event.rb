@@ -1,9 +1,5 @@
 class CalendarEvent < ActiveRecord::Base
-  validates :title, presence: { message: 'Please specify a title' }
-  validates :start_time, presence: { message: 'Please add a start time.' }
-  validates :end_time, presence: { message: 'Please add an end time.' }
-  validates :city, presence: { message: 'Please add a city.' }
-  validates :state_id, presence: { message: 'Please specify the state where this incident occurred before saving.' }
+  validates :title, presence: true
 
   has_many :comments, as: :commentable
   belongs_to :user
