@@ -1,40 +1,46 @@
 <p id="notice"><%= notice %></p>
+<div class='bg'>
+<br>
+<br>
+  <p class="text-center event-details">
+    <strong>Title:</strong>
+    <%= @calendar_event.title %>
+  </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @calendar_event.title %>
-</p>
+  <p class="text-center event-details">
+    <strong>Type:</strong>
+    <%= @calendar_event.event_type %>
+  </p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @calendar_event.event_type %>
-</p>
+  <p class="text-center event-details">
+    <strong>Description:</strong>
+    <%= @calendar_event.description %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @calendar_event.description %>
-</p>
+  <p class="text-center event-details">
+    <strong>Event Owner:</strong>
+    <%= link_to @event_owner.name, user_path(@event_owner) %>
+  </p>
 
-<p>
-  <strong>Event Owner:</strong>
-  <%= link_to @event_owner.name, user_path(@event_owner) %>
-</p>
+  <p class="text-center event-details">
+    <strong>Start time:</strong>
+    <%= @calendar_event.start_time.strftime("%A, %d %b %Y %l:%M %p") %>
+  </p>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @calendar_event.start_time.strftime("%A, %d %b %Y %l:%M %p") %>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= @calendar_event.end_time.strftime("%A, %d %b %Y %l:%M %p") %>
-</p>
-
-<h3>Comment on this event:</h3>
-<%= render "comments/add_comment_form" %>
-<div class="commentList" >
-  <%= render "comments/comments" %>
+  <p class="text-center event-details">
+    <strong>End time:</strong>
+    <%= @calendar_event.end_time.strftime("%A, %d %b %Y %l:%M %p") %>
+  </p>
+  <br>
+  <br>
 </div>
+
+  <div class="commentList" >
+    <%= render "comments/comments" %>
+  </div>
+  <h3>Comment on this event:</h3>
+  <%= render "comments/add_comment_form" %>
+<br>
 
 <%= link_to 'Edit', 
                 edit_calendar_event_path(@calendar_event), 

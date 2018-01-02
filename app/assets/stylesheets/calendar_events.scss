@@ -1,3 +1,28 @@
 // Place all the styles related to the CalendarEvents controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bg { 
+    /* The image used */
+    background-image:
+	    linear-gradient(
+	      rgba(0, 0, 0, 0.5),
+	      rgba(0, 0, 0, 0.5)
+	      ), 
+	    url("https://www.dailydot.com/wp-content/uploads/b9d/af/7deac0396322d2a6-2048x1024.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.event-details {
+	/* style for event details on show view */
+	font-size: 1.5em;
+	font-weight: normal;
+	color: white;
+}
